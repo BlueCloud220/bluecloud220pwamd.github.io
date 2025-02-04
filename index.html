@@ -1,61 +1,107 @@
 <!DOCTYPE html>
 <html lang="es" class="light dark">
-  <head>
-    <meta charset="UTF-8" />
-    <title>PWA con MD3 | Blue Cloud</title>
 
-    <!-- Resumen para los motores de búsqueda. -->
-    <meta name="description" content="Ejemplo de PWA con Material Design" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Formulario - Chascarrillos | Blue Cloud</title>
 
-    <script src="js/registraServiceWorker.js"></script>
+  <script src="js/registraServiceWorker.js"></script>
 
-    <meta name="viewport" content="width=device-width" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="theme-color" content="#fffbfe" />
+  <link rel="icon" sizes="32x32" href="favicon.ico" />
+  <link rel="manifest" href="site.webmanifest" />
+  <script src="ungap/custom-elements.js"></script>
 
-    <!-- Color de la barra de navegación de Chrome en dispositivos móviles. -->
-    <meta name="theme-color" content="#fffbfe" />
+  <script type="module" src="js/configura.js"></script>
+  <link rel="stylesheet" href="css/estilos.css" />
+  <link rel="stylesheet" href="css/transicion_completa.css" />
+</head>
 
-    <!-- Ícono para la página web, que normalmente se pone en la raíz del sitio.
-     Puede ser diferente para cada página. -->
-    <link rel="icon" sizes="32x32" href="favicon.ico" />
+<body>
+  <nav-tab-fixed id="tab" style="margin-top: 2rem; margin-bottom: 2rem;"></nav-tab-fixed>
 
-    <!-- Configuración de la PWA para Chrome, Edge y Safari.
-     Debe ponerse en todas las páginas. -->
-    <link rel="manifest" href="site.webmanifest" />
-
-    <!-- Permite a los navegadores, que como Safari no soportan el estándar
-     completo de custom elementsm, lo cumplan totalmente. Debe ponerse en todas
-     las páginas. -->
-    <script src="ungap/custom-elements.js"></script>
-
-    <!-- Configuración de todas las páginas con JavaSript. -->
-    <script type="module" src="js/configura.js"></script>
-    <link rel="stylesheet" href="css/estilos.css" />
-    <link rel="stylesheet" href="css/transicion_completa.css" />
-  </head>
-
-  <body>
-    <md-top-app-bar class="center-aligned">
-      <h1>PWA con MD3 | Blue Cloud</h1>
-
-      <button is="md-menu-button" slot="navigation"></button>
-
-      <button
-        type="button"
-        class="md-standard-icon-button avatar"
-        title="Perfil"
-        slot="action"
-      >
-        <span class="material-symbols-outlined">account_circle</span>
-      </button>
-    </md-top-app-bar>
+  <form id="form" novalidate onsubmit="procesa(event)">
 
     <main>
       <p>
-        Esta es la página principal de la app que cuenta chistes que los
-        integrantes de Blue Cloud dijeron.
+        <span class="md-filled-text-field" accesskey="G">
+          <md-select-menu id="selectIntegrante" required options="opcionesDeIntegrante"
+            oninput="copiaMensajes()"></md-select-menu>
+          <span>Integrante del equipo *</span>
+          <small id="supportingIntegrante">Obligatorio</small>
+        </span>
+      </p>
+
+      <p>
+        <button class="md-filled-button" style="width: 100%">
+          Descubrir chiste
+        </button>
       </p>
     </main>
 
+    <md-options-menu id="opcionesDeIntegrante" aria-label="Opciones de integrante">
+      <span data-value="" title="Selecciona a un integrante del equipo"></span>
+      <span data-value="cve">Ceballos Villalba Eduardo</span>
+      <span data-value="cpu">Colin Pérez Usiel</span>
+      <span data-value="fpar">Franco Pulido Alan Rodrigo</span>
+      <span data-value="gmla">García Mendoza Luis Alberto</span>
+      <span data-value="pjam">Pacheco Jara Anheli Magdalena</span>
+      <span data-value="pvjj">Pinzón Vázquez Jonathan Jesús</span>
+    </md-options-menu>
+
     <nav-drw></nav-drw>
-  </body>
+  </form>
+
+  <script type="module">
+    import { muestraTextoDeAyuda } from "./lib/js/muestraTextoDeAyuda.js";
+    import { exportaAHtml } from "./lib/js/exportaAHtml.js";
+    import { muestraError } from "./lib/js/muestraError.js";
+
+    function copiaMensajes() {
+      muestraTextoDeAyuda(
+        selectIntegrante,
+        supportingIntegrante,
+        "Obligatorio"
+      );
+    }
+    exportaAHtml(copiaMensajes);
+
+    /**
+     * @param {SubmitEvent} evt
+     */
+    function procesa(evt) {
+      evt.preventDefault();
+      try {
+        copiaMensajes();
+        if (selectIntegrante.validity.valid) {
+          const integrante = selectIntegrante.value;
+          const resultado = descubreChiste(integrante);
+          alert(resultado);
+        }
+      } catch (e) {
+        muestraError(e);
+      }
+    }
+    exportaAHtml(procesa);
+
+    /** @param {string} integrante */
+    function descubreChiste(integrante) {
+      if (integrante === "cve") {
+        return "- Hola, ¿tienen libros para el cansancio?\n- Sí, pero están agotados.";
+      } else if (integrante === "cpu") {
+        return "- ¿Sabes cuál es el animal más antiguo?\n- La cebra, porque está en blanco y negro.";
+      } else if (integrante === "fpar") {
+        return "- Mamá, en la escuela me llaman distraído.\n- ¡Juanito, tú vives en la casa de enfrente!";
+      } else if (integrante === "gmla") {
+        return "- ¿Cómo se dice pañuelo en chino?\n- Saka-moco.";
+      } else if (integrante === "pjam") {
+        return "- ¿Qué le dice un gusano a otro gusano?\n- ¡Voy a dar una vuelta a la manzana!";
+      } else if (integrante === "pvjj") {
+        return "- ¿Por qué los pájaros no usan Facebook?\nPorque ya tienen Twitter.";
+      }
+    }
+  </script>
+</body>
+
 </html>
