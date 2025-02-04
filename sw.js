@@ -15,12 +15,12 @@
  * conoce como número menor y se cambia cuando se realizan
  * modificaciones menores.
  */
-const VERSION = "5.00";
+const VERSION = "6.00";
 
 /**
  * Nombre de la carpeta de caché.
  */
-const CACHE = "pwamd3";
+const CACHE = "chascarrillos";
 
 /**
  * Archivos requeridos para que la aplicación funcione fuera de
@@ -29,7 +29,6 @@ const CACHE = "pwamd3";
 const ARCHIVOS = [
   "ayuda.html",
   "favicon.ico",
-  "formulario.html",
   "index.html",
   "site.webmanifest",
   "css/dark-hc.css",
