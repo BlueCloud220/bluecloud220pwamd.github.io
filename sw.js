@@ -15,12 +15,12 @@
  * conoce como número menor y se cambia cuando se realizan
  * modificaciones menores.
  */
-const VERSION = "5.00";
+const VERSION = "7.00";
 
 /**
  * Nombre de la carpeta de caché.
  */
-const CACHE = "pwamd3";
+const CACHE = "chascarrillos";
 
 /**
  * Archivos requeridos para que la aplicación funcione fuera de
@@ -29,7 +29,6 @@ const CACHE = "pwamd3";
 const ARCHIVOS = [
   "ayuda.html",
   "favicon.ico",
-  "formulario.html",
   "index.html",
   "site.webmanifest",
   "css/dark-hc.css",
@@ -39,7 +38,6 @@ const ARCHIVOS = [
   "css/light-hc.css",
   "css/light-mc.css",
   "css/light.css",
-  "css/transicion_completa.css",
   "css/transicion_pestanas.css",
   "img/icono2048.png",
   "img/maskable_icon.png",
@@ -53,10 +51,7 @@ const ARCHIVOS = [
   "img/screenshot_horizontal.png",
   "img/screenshot_vertical.png",
   "js/configura.js",
-  "js/nav-bar.js",
-  "js/nav-drw.js",
   "js/nav-tab-fixed.js",
-  "js/nav-tab-scrollable.js",
   "js/registraServiceWorker.js",
   "lib/css/material-symbols-outlined.css",
   "lib/css/md-cards.css",

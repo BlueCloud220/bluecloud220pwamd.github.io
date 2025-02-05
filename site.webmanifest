@@ -1,6 +1,6 @@
 {
- "short_name": "PWA con MD3",
- "name": "PWA con Material Design 3",
+ "short_name": "Chascarrillos",
+ "name": "Chascarrillos",
  "id": "/index.html",
  "start_url": "/index.html",
  "display": "standalone",
@@ -16,14 +16,14 @@
    "sizes": "1257x646",
    "type": "image/png",
    "form_factor": "wide",
-   "label": "PWA con Material Design 3"
+   "label": "Chascarrillos"
   },
   {
    "src": "/img/screenshot_vertical.png",
    "sizes": "595x644",
    "type": "image/png",
    "form_factor": "narrow",
-   "label": "PWA con Material Design 3 (2)"
+   "label": "Chascarrillos (2)"
   }
  ],
  "icons": [
